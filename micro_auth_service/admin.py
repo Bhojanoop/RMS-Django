@@ -1,0 +1,8 @@
+from django.contrib import admin
+from micro_auth_service.model.admin_model import Admin
+from micro_auth_service.model.vendor_models import Vendor
+from micro_auth_service.model.customer_model import Customer
+
+admin.site.register(Admin)
+admin.site.register(Vendor)
+admin.site.register(Customer)
