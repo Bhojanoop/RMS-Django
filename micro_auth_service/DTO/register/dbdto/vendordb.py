@@ -10,11 +10,13 @@ class VendorDbDTO:
     password:str=field(default_factory=str)
     vendor:VendorDTO=field(default_factory=object)
     request:object=field(default_factory=object)
+    refresh_token:str=field(default_factory=str)
     
     def __post_init__(self):    
         try:
             self.vendor=VendorDTO(**self.request.data)
             self.password=make_password(self.vendor.password)
             self.id=str(uuid.uuid3(uuid.NAMESPACE_DNS,self.vendor.phone)).strip()
+            self.refresh_token=''
         except Exception as e:
             raise Exception(str(e))

@@ -22,7 +22,8 @@ class AdminLogin:
                 "type":"admin",
                 "admin_role_id":admin.permission_level
             }).get_token()
-
+            admin.refresh_token=tokens['refresh_token']
+            admin.save()
             return {"info":"admin successfully logged in!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:
             raise Exception(str(e))
