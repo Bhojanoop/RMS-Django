@@ -18,4 +18,4 @@ class Register(APIView):
     @log(logger=logger)
     def post(self,request:object,usertype:str):
         message=self._service.register(request=request,usertype=usertype)
-        return Response(message,status=status.HTTP_200_OK)
+        return Response(message,status=status.HTTP_201_CREATED)
