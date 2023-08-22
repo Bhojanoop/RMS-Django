@@ -18,9 +18,6 @@ from django.views.static import serve
 from django.conf.urls.static import static
 from django.urls import path, include, re_path
 from django.conf import settings
-from django.contrib.auth.hashers import check_password
-
-print(check_password("utsav@2001","pbkdf2_sha256$390000$CoqoCIUIK7UblqWQwVz6Jh$iuNmZ4yoivizoe7JARrrojlUvCV6RXiChvqMytyuJnY="))
 
 urlpatterns = [
     path('admin/', admin.site.urls),

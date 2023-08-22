@@ -10,7 +10,6 @@ class Vendor(models.Model):
     referral_code=models.CharField(max_length=20,null=True,blank=True)
     is_notified=models.BooleanField(default=False)
 
-    @property
     def is_valid_password(self,password):
         return check_password(password,self.password)
 

@@ -9,12 +9,14 @@ import logging
 
 logger=logging.getLogger('mylogger')
 
+from micro_auth_service.service.login.main import MainLoginService
+
 class Login(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        pass
+        self._loginservice=MainLoginService()
 
     @log(logger=logger)
     def post(self,request:object,usertype:str):
-        message:dict
+        message=self._loginservice.login(request=request,usertype=usertype)
         return Response(message,status=status.HTTP_200_OK)

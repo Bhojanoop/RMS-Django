@@ -15,7 +15,6 @@ class Admin(models.Model):
     password=models.CharField(max_length=350,null=True,blank=True,unique=True)
     permission_level=models.CharField(max_length=1,null=True,blank=True,choices=PERMISSION_LEVEL,default='1')
 
-    @property
     def is_valid_password(self,password):
         return check_password(password,self.password)
 

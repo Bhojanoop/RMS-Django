@@ -1,6 +1,7 @@
 from abc import ABC,abstractmethod
 from dataclasses import dataclass,field
 from datetime import datetime,timedelta
+from decouple import config
 
 def access_token_times(exp:int)->dict:
     a={"iat":datetime.timestamp(datetime.now())}
@@ -22,8 +23,8 @@ class JwtABC(ABC):
 
 @dataclass(init=False)
 class JwtOwnAttr:
-    jwt_secret:str='utsavsupratim'
-    jwt_algos:str='HS512'
+    jwt_secret:str=config('JWT_SECRET')
+    jwt_algos:str=config('JWT_ALGO')
 
 
 @dataclass
