@@ -17,8 +17,10 @@ class RegisterVendor:
             serializer=VendorRegisterSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-                del serializer.data['password']
-                return {"data":serializer.data,"info":"vendor is created!","timestamp":datetime.now().timestamp()}
+                response=serializer.data
+                del response['password']
+                del response['refresh_token']
+                return {"data":response,"info":"vendor is created!","timestamp":datetime.now().timestamp()}
             else:
                 raise Exception(str(serializer.errors))
         except Exception as e:

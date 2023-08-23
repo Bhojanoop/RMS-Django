@@ -6,24 +6,25 @@ from datetime import datetime
 
 class AdminLogin:
 
-    def _fetchDetails(self,request:object):
+    def _getAdmin(self,request:object):
         try:
             dto=LoginDTO(**request.data)
-            admin=Admin.objects.get(id=dto.username)
+            admin=Admin.objects.filter(email=dto.username)
             return admin
         except Exception as e:
             raise Exception(str(e))
 
     def get_tokens(self,request:str)->dict:
         try:
-            admin=self._fetchDetails(request=request)
+            admin=self._getAdmin(request=request)
+            print(admin)
             tokens=JwtBuilder(payload={
-                "username":admin.id,
+                "sub":admin.values('id')[0]['id'],
+                "name":admin.values('full_name')[0]['full_name'],
                 "type":"admin",
-                "admin_role_id":admin.permission_level
+                "admin_role_id":admin.values('permission_level')[0]['permission_level']
             }).get_token()
-            admin.refresh_token=tokens['refresh_token']
-            admin.save()
+            admin.update(refresh_token=tokens['refresh_token'])
             return {"info":"admin successfully logged in!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:
             raise Exception(str(e))

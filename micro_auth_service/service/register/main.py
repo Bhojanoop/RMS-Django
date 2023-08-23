@@ -6,7 +6,7 @@ from micro_auth_service.service.register.dbservice.customerdb import RegisterCus
 class MainRegisterService:
 
     def __init__(self) -> None:
-        self._registrations={
+        self._usertypes={
             "VENDOR":RegisterVendor,
             "ADMIN":RegisterAdmin,
             "CUSTOMER":RegisterCustomer
@@ -14,6 +14,6 @@ class MainRegisterService:
 
     def register(self,request:object,usertype:str):
         try:
-            return self._registrations[usertype.upper()]().save(request)
+            return self._usertypes[usertype.upper()]().save(request)
         except Exception as e:
             raise Exception(str(e))

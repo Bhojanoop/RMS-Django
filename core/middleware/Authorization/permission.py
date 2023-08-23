@@ -2,6 +2,8 @@ import json
 from django.conf import settings
 from django.http import JsonResponse
 from datetime import datetime
+from micro_auth_service.jwt.main import JwtBuilder
+
 
 class Authorization:
     def __init__(self, get_response):
@@ -16,17 +18,29 @@ class Authorization:
             if path['endpoint'] in incoming_req_path:
                 return path
     
-    def isAuthorized(self,request:object)->bool:
-        if request.META.get('HTTP_X_USERID'):
+    def hasToken(self,request):
+        if request.META.get('HTTP_AUTHORIZATION'):
             return True
         else:
            return False
+    
+    def isTokenValid(self,request):
+        try:
+            res=JwtBuilder(token=(request.META.get('HTTP_AUTHORIZATION').split(' ', 1)[1])).decode()
+            if res.get('sub'):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
 
     def __call__(self, request):
         loc=self.get_exact_loc(request=request)
         if loc and loc['protected']==1:
-            if not self.isAuthorized(request=request):
-                return JsonResponse({'message': 'permission denied!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
+            if not self.hasToken(request=request):
+                return JsonResponse({'message': 'no bearer token found!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
+            elif not self.isTokenValid(request=request):
+                return JsonResponse({'message': 'token is invalid!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
 
         response = self.get_response(request)
         return response

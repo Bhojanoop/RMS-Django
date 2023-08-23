@@ -1,6 +1,7 @@
 {
     "paths": [
         { "app": "micro_auth_service", "endpoint": "register", "protected": 0 },
-        { "app": "micro_auth_service", "endpoint": "login", "protected": 0 }
+        { "app": "micro_auth_service", "endpoint": "login", "protected": 0 },
+        { "app": "micro_auth_service", "endpoint": "get-new-token", "protected": 1 }
     ]
 }
