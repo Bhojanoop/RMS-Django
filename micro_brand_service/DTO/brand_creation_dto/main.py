@@ -17,7 +17,7 @@ class BrandCreateDTO(BaseModel):
             raise Exception(str(e))
     
     @validator('govt_doc_b64encode',allow_reuse=True,always=True)
-    def arrange_musicFileObj(cls,value):
+    def arrange_govFileObj(cls,value):
         try:
             if value:
                 return value.split(',')[1]

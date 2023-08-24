@@ -11,10 +11,11 @@ class Factory:
     
     def get_exact_loc(self,request:object)->dict:
         incoming_req_path=str(request.path).split("/")
-        all_registered_paths=self._register_paths['paths']
-        for path in all_registered_paths:
-            if path['endpoint'] in incoming_req_path:
-                return path
+        if incoming_req_path[1]!='admin':
+            all_registered_paths=self._register_paths['paths']
+            for path in all_registered_paths:
+                if path['endpoint'] in incoming_req_path:
+                    return path
             
     def middleware(self,request:object)->object:
         loc=self.get_exact_loc(request=request)
