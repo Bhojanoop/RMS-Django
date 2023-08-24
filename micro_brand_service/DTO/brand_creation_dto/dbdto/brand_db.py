@@ -1,18 +1,20 @@
 from dataclasses import dataclass,field
 from micro_brand_service.DTO.brand_creation_dto.main import BrandCreateDTO
 from datetime import datetime
+import uuid
 
 @dataclass
-class DbBrandCreateDTO:
+class BrandCreateDbDTO:
     request:object=field(default_factory=object)
-    role:str=field(default_factory=str)
+    brand_id:str=field(default_factory=str)
+    is_verified:bool=False
     created_at:float=field(default_factory=float)
     main_dto:BrandCreateDTO=field(default_factory=object)
 
     def __post_init__(self):
         try:
            self.main_dto=BrandCreateDTO(**self.request.data)
-           self.role="admin"
+           self.brand_id=str(uuid.uuid3(uuid.NAMESPACE_DNS,name=self.main_dto.brand_name)).strip()
            self.created_at=datetime.now().timestamp()
         except Exception as e:
             raise Exception(str(e))

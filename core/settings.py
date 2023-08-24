@@ -84,14 +84,22 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #'ENGINE': 'django.db.backends.postgresql',
+    #'NAME': 'neondb',
+    #'USER': 'utsavpokemon9000chatterjee',
+    #'PASSWORD': 'S3UQI6ndKNHG',
+    #'HOST': 'ep-long-wave-744014.us-east-2.aws.neon.tech',
+    #'PORT': '5432',
+    #}
     'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'neondb',
-    'USER': 'utsavpokemon9000chatterjee',
-    'PASSWORD': 'S3UQI6ndKNHG',
-    'HOST': 'ep-long-wave-744014.us-east-2.aws.neon.tech',
+    'NAME': 'bhojanoop',
+    'USER': 'utsav',
+    'PASSWORD': 'utsav2001',
+    'HOST': 'bhojanoop.cofhuefetzvg.eu-north-1.rds.amazonaws.com',
     'PORT': '5432',
-  }
+    }
 }
 
 REST_FRAMEWORK = {
