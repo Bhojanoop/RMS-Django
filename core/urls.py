@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/v1/brand/',include('micro_brand_service.urls')),
     path('api/v1/auth/',include('micro_auth_service.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
