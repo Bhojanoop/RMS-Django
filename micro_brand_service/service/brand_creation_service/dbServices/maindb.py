@@ -11,9 +11,8 @@ class DbService:
 
     def _create_brand(self,request:object)->dict:
         try:
-            res=self._store.storeLogo(request)
-            if res:
-                return CreateBrand().save(request=request)
+            self._store.storeLogo(request)
+            return CreateBrand().save(request=request)
         except Exception as e:
             raise Exception(str(e))
     
@@ -25,9 +24,8 @@ class DbService:
     
     def _create_brand_verify(self,request:object)->dict:
         try:
-            res=self._store.storeGovtFile(request)
-            if res:
-                return CreateBrandVerify().save(request=request)
+            self._store.storeGovtFile(request)
+            return CreateBrandVerify().save(request=request)
         except Exception as e:
             raise Exception(str(e))
     

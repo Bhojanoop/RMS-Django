@@ -1,22 +1,24 @@
-from micro_brand_service.serializer.brandRole import BrandCreateRoleSerializer
 from micro_brand_service.DTO.brand_creation_dto.dbdto.brandRole_db import BrandCreateDefaultRoleDbDTO
+from micro_brand_service.models.brandRoles import BrandRoles
 
 class CreateBrandRoleDefault:
 
     def save(self,request:object)->dict:
         try:
-            dto=BrandCreateDefaultRoleDbDTO(request=request).__dict__
-            del dto['request']
-            del dto['main_dto']
+            dto=BrandCreateDefaultRoleDbDTO(request=request)
 
-            serializer=BrandCreateRoleSerializer(data=dto)
-
-            if serializer.is_valid():
-                serializer.save()
-
-                return serializer.data
+            BrandRoles.objects.create(
+                id=dto.id,
+                user=dto.user,
+                brand=dto.brand,
+                role=dto.role,
+                created_at=dto.created_at
+            )
             
-            raise Exception(str(serializer.errors))
+            return {
+                "id":dto.id,"user":dto.user.full_name,"brand":dto.brand.brand_name,"role":dto.role.role_name,"created_at":dto.created_at
+            }
+
         except Exception as e:
             raise Exception(str(e))
 

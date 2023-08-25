@@ -19,6 +19,8 @@ from django.conf.urls.static import static
 from django.urls import path, include, re_path
 from django.conf import settings
 
+from django.http import JsonResponse
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/brand/',include('micro_brand_service.urls')),

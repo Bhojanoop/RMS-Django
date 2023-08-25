@@ -9,8 +9,8 @@ class BrandRoles(models.Model):
     id=models.CharField(max_length=100,primary_key=True,default="")
     user=models.ForeignKey(Vendor,on_delete=models.CASCADE,related_name='brandroles_user')
     brand=models.ForeignKey(Brand,on_delete=models.CASCADE,related_name='brandroles_brand')
-    role=models.ForeignKey(RolesBrand,on_delete=models.CASCADE,related_name='brandroles_role',default="no role")
+    role=models.ForeignKey(RolesBrand,on_delete=models.CASCADE,related_name='brandroles_role')
     created_at=models.CharField(max_length=50,default=datetime.now().timestamp())
 
     def __str__(self) -> str:
-        return self.brand.brand_name + " " + self.role
+        return self.brand.brand_name + " " + self.role.role_name
