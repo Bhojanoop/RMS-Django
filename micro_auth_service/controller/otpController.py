@@ -18,4 +18,4 @@ class OtpController(APIView):
     @log(logger=logger)
     def post(self,request:object):
         message=self._service.process(request)
-        return Response(message,status=status.HTTP_200_OK)
+        return Response(message,status=status.HTTP_202_ACCEPTED)

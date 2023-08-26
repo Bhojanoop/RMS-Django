@@ -3,12 +3,14 @@ from django.conf import settings
 from django.http import JsonResponse
 from datetime import datetime
 from micro_auth_service.jwt.main import JwtBuilder
+import os
 
+middleware_json=os.path.join(settings.BASE_DIR,'middleware.json')
 
 class Authorization:
     def __init__(self, get_response):
         self.get_response = get_response
-        with open(f"{settings.BASE_DIR}\\middleware.json", "r") as read_file:
+        with open(middleware_json, "r") as read_file:
             self._register_paths:dict=json.load(read_file)
     
     def get_exact_loc(self,request:object)->dict:
@@ -27,6 +29,7 @@ class Authorization:
     def isTokenValid(self,request):
         try:
             res=JwtBuilder(token=(request.META.get('HTTP_AUTHORIZATION').split(' ', 1)[1])).decode()
+            print(res)
             if res.get('sub'):
                 return True
             return False

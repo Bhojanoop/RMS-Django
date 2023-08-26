@@ -9,6 +9,8 @@ class Vendor(models.Model):
     password=models.CharField(max_length=350,null=True,blank=True)
     referral_code=models.CharField(max_length=20,null=True,blank=True)
     is_notified=models.BooleanField(default=False)
+    email_verified_at=models.CharField(max_length=20,null=True,blank=True)
+    registered_at=models.CharField(max_length=20,null=True,blank=True)
     refresh_token=models.TextField(default="",null=True,blank=True)
 
     def is_valid_password(self,password):

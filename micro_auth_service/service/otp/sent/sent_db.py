@@ -5,14 +5,14 @@ class OtpSaveDB:
 
     def save(self,dto:SentOtpDto)->bool:
         try:
-            if OTP.objects.filter(verifiable_cred=dto.otp_main.email).exists():
-                otp_obj=OTP.objects.get(verifiable_cred=dto.otp_main.email)
+            if OTP.objects.filter(verifiable_cred=dto.otp_main.phone).exists():
+                otp_obj=OTP.objects.get(verifiable_cred=dto.otp_main.phone)
                 otp_obj.otp=dto.sentable_otp
                 otp_obj.expiry=dto.expiry
                 otp_obj.save()
             else:
                 OTP.objects.create(
-                    verifiable_cred=dto.otp_main.email,
+                    verifiable_cred=dto.otp_main.phone,
                     otp=dto.sentable_otp,
                     expiry=dto.expiry
                 )
