@@ -25,6 +25,6 @@ class AdminLogin:
                 "admin_role_id":admin.values('permission_level')[0]['permission_level']
             }).get_token()
             admin.update(refresh_token=tokens['refresh_token'])
-            return {"info":"admin successfully logged in!","token":tokens,"timestamp":datetime.now().timestamp()}
+            return {"message":"admin successfully logged in!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:
             raise Exception(str(e))

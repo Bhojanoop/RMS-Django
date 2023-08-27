@@ -16,7 +16,7 @@ class RegisterCustomer:
             serializer=CustomerRegisterSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-                return {"data":serializer.data,"info":"customer is created!","timestamp":datetime.now().timestamp()}
+                return {"data":serializer.data,"message":"customer is created!","timestamp":datetime.now().timestamp()}
             else:
                 raise Exception(str(serializer.errors))
         except Exception as e:

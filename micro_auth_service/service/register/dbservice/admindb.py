@@ -20,7 +20,7 @@ class RegisterAdmin:
                 response=serializer.data
                 del response['password']
                 del response['refresh_token']
-                return {"data":response,"info":"admin is created!","timestamp":datetime.now().timestamp()}
+                return {"data":response,"message":"admin is created!","timestamp":datetime.now().timestamp()}
             else:
                 raise Exception(str(serializer.errors))
         except Exception as e:

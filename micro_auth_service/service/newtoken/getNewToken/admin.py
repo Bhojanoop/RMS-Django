@@ -22,6 +22,6 @@ class GetNewTokenAdmin:
             }).get_token()
             admin.refresh_token=tokens['refresh_token']
             admin.save()
-            return {"info":"new tokens are created for admin!","token":tokens,"timestamp":datetime.now().timestamp()}
+            return {"message":"new tokens are created for admin!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:
             raise Exception(str(e))

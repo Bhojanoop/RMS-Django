@@ -25,7 +25,7 @@ class MailService:
                 data=sentable_data,
                 template_name='mail_verification.html'
             )
-            return {"info":f"verification link send to {dto.email}"}
+            return {"message":f"verification link send to {dto.email}"}
         except Exception as e:
             raise Exception(str(e))
         

@@ -22,6 +22,6 @@ class GetNewTokenVendor:
             }).get_token()
             vendor.refresh_token=tokens['refresh_token']
             vendor.save()
-            return {"info":"new tokens are created for vendor!","token":tokens,"timestamp":datetime.now().timestamp()}
+            return {"message":"new tokens are created for vendor!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:
             raise Exception(str(e))
