@@ -11,7 +11,7 @@ class VendorLogin:
     def _getVendor(self,request:object):
         try:
             dto=LoginDTO(**request.data)
-            vendor=Vendor.objects.filter(email=dto.username)
+            vendor=Vendor.objects.filter(phone=dto.username)
             #brand_role_name=''
             #brand_role_id=''
             #brand_name=''

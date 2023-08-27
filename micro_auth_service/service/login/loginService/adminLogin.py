@@ -9,7 +9,7 @@ class AdminLogin:
     def _getAdmin(self,request:object):
         try:
             dto=LoginDTO(**request.data)
-            admin=Admin.objects.filter(email=dto.username)
+            admin=Admin.objects.filter(phone=dto.username)
             return admin
         except Exception as e:
             raise Exception(str(e))

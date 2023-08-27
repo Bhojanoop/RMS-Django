@@ -14,10 +14,10 @@ class LoginValidationMiddleware:
         }
 
     def has_user(self,username:str,DB:object)->bool:
-        return DB.objects.filter(email=username).exists()
+        return DB.objects.filter(phone=username).exists()
     
     def password_matched(self,password:str,username:str,DB:object):
-        _password=DB.objects.filter(email=username).values('password')[0]['password']
+        _password=DB.objects.filter(phone=username).values('password')[0]['password']
         return check_password(password,_password)
 
 

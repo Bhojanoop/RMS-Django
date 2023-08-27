@@ -8,7 +8,7 @@ class JwtBuilder(JwtABC):
         self._payload=payload
         self._token=token
         if payload:
-            self._attr=JwtCustomAttr(payload=self._payload,access_token_exp=13,refresh_token_exp=17)
+            self._attr=JwtCustomAttr(payload=self._payload,access_token_exp=2880,refresh_token_exp=20160)
     
     def get_token(self)->dict:
         try:
