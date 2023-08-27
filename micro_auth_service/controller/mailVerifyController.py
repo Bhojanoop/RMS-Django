@@ -27,11 +27,13 @@ class MailVerify(View):
     def __init__(self, **kwargs: Any) -> None:
         self._service=MainMailVerifyService
 
-    def get(self,request,email):
+    def get(self,request,email,user):
         try:
             service=self._service().verify(email)
             if service:
-                return HttpResponse('<h1>Verified</h1>')
+                return render(request=request,template_name='email_verify.html',context={
+                    "user":user
+                })
             else:
                 return HttpResponse('<h1>not found</h1>')
         except Exception as e:

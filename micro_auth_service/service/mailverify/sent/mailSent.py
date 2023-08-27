@@ -5,6 +5,7 @@ from micro_auth_service.model.vendor_models import Vendor
 class MailService:
 
     def get_username(self,email):
+        print('hi2')
         try:
             return Vendor.objects.filter(email=email).values('full_name')[0]['full_name']
         except Exception as e:
@@ -19,11 +20,11 @@ class MailService:
             )
             sentable_data={
                 "user_name":user_name,
-                "verification_link":'http://'+request.META['HTTP_HOST']+f'/api/v1/auth/bhojanoop/mail-verify/email={dto.email}'
+                "verification_link":'http://'+request.META['HTTP_HOST']+f'/api/v1/auth/bhojanoop/mail-verify/email={dto.email}&user={user_name}'
             }
             mail.send(
                 data=sentable_data,
-                template_name='mail_verification.html'
+                template_name='sent_mail_verification.html'
             )
             return {"message":f"verification link send to {dto.email}"}
         except Exception as e:

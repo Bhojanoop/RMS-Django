@@ -12,5 +12,5 @@ urlpatterns = [
     path('get-new-token/user-type=<str:usertype>&userid=<str:userid>',GetNewToken.as_view()),
     path('otp-verification',OtpController.as_view()),
     path('mail-verify',MailVerificationController.as_view()),
-    path('bhojanoop/mail-verify/email=<str:email>',MailVerify.as_view())
+    path('bhojanoop/mail-verify/email=<str:email>&user=<str:user>',MailVerify.as_view())
 ]

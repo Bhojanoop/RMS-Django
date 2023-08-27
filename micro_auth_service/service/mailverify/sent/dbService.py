@@ -6,6 +6,7 @@ class DbMailVerifyService:
 
     def save_record(self,dto:MailVerifyDTO)->bool:
         try:
+            print('hi')
             if not MailVerify.objects.filter(email=dto.email).exists():
                 MailVerify.objects.create(
                     email=dto.email,
@@ -15,6 +16,7 @@ class DbMailVerifyService:
             else:
                 mailobj=MailVerify.objects.get(email=dto.email)
                 mailobj.open_at=str(datetime.timestamp(datetime.now()))
+                mailobj.open_for_verify=True
                 mailobj.save()
             return True
         except Exception as e:

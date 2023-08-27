@@ -3,6 +3,8 @@ from django.conf import settings
 from core.middleware.Validation.micro_auth_service_login.main import LoginValidationMiddleware
 from core.middleware.Validation.micro_auth_service_register.main import RegisterValidationMiddleware
 from core.middleware.Validation.micro_auth_service_otpverify.main import OTPValidationMiddleware
+from core.middleware.Validation.micro_auth_service_mailverify.main import MailVerifyValidationMiddleware
+
 
 import os
 
@@ -31,5 +33,7 @@ class Factory:
                 return RegisterValidationMiddleware()
             elif loc['endpoint']=='otp-verification' and loc['app']=='micro_auth_service':
                 return OTPValidationMiddleware()
+            elif loc['endpoint']=='mail-verify' and loc['app']=='micro_auth_service':
+                return MailVerifyValidationMiddleware()
   
         return None
