@@ -10,12 +10,12 @@ class Verify:
                 obj=OTP.objects.get(verifiable_cred=dto.phone)
                 if(int(obj.otp)==int(dto.otp) and float(obj.expiry))>datetime.timestamp(datetime.now()):
                     obj.delete()
-                    return {"message":f"Verification done for {dto.phone}!"}
+                    return {"message":f"Verification done for {dto.phone}!","timestamp":datetime.now().timestamp()}
                 elif (int(obj.otp)!=int(dto.otp) and float(obj.expiry))>datetime.timestamp(datetime.now()):
-                    return {"message":"Wrong OTP. If you miss otp you can resend it!"}
+                    raise Exception("Wrong OTP. If you miss otp you can resend it!")
                 else:
                     obj.delete()
-                    return {"message":"Invalid OTP!"}
+                    raise Exception("Invalid OTP!")
             else:
                 raise Exception("credential for otp verify does not match!")
         except Exception as e:

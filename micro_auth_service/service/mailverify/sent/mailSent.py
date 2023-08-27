@@ -1,6 +1,7 @@
 from core.mail.mailing import Mail
 from micro_auth_service.DTO.mailverify.mailverify_dto import MailVerifyDTO
 from micro_auth_service.model.vendor_models import Vendor
+from datetime import datetime
 
 class MailService:
 
@@ -26,7 +27,7 @@ class MailService:
                 data=sentable_data,
                 template_name='sent_mail_verification.html'
             )
-            return {"message":f"verification link send to {dto.email}"}
+            return {"message":f"verification link send to {dto.email}","timestamp":datetime.now().timestamp()}
         except Exception as e:
             raise Exception(str(e))
         
