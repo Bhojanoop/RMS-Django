@@ -35,7 +35,7 @@ class MailVerify(View):
                     "user":user
                 })
             else:
-                return HttpResponse('<h1>not found</h1>')
+                return render(request=request,template_name='page_not_found.html')
         except Exception as e:
-            return HttpResponse(f'<h1>{str(e)}</h1>')
+            return render(request=request,template_name='page_not_found.html')
 
