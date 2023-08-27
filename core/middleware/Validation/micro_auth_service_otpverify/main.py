@@ -16,13 +16,13 @@ class OTPValidationMiddleware:
     def _is_cred_ok(self,dto:OtpDTO)->bool:
         try:
             if dto.verification_type=='LOGIN':
-                if not Vendor.objects.filter(phone=dto.phone).exists():
+                if Vendor.objects.filter(phone=dto.phone).exists():
                     return True
                 else:
                     raise Exception("phone does not exists")
                 
             elif dto.verification_type=='REGISTER': 
-                if (Vendor.objects.filter(phone=dto.phone).exists() and Vendor.objects.filter(email=dto.email).exists()):
+                if not (Vendor.objects.filter(phone=dto.phone).exists() and Vendor.objects.filter(email=dto.email).exists()):
                     return True
                 else:
                     raise Exception("phone or email exists")
@@ -33,9 +33,11 @@ class OTPValidationMiddleware:
         try:
             body_unicode = request.body.decode('utf-8')
             _data:dict = json.loads(body_unicode)
-            dto=OtpDTO(**_data)
-            self._is_verificationType_ok(dto=dto)
-            self._is_cred_ok(dto=dto)
+
+            if not _data.get('verify'):
+                dto=OtpDTO(**_data)
+                self._is_verificationType_ok(dto=dto)
+                self._is_cred_ok(dto=dto)
         except Exception as e:
             raise Exception(str(e))
 

@@ -1,0 +1,9 @@
+INFO : [27/Aug/2023 12:33:12 package : micro_auth_service.controller.otpController --> position : OtpController.post]
+INFO : [27/Aug/2023 12:35:46 package : micro_auth_service.controller.otpController --> position : OtpController.post]
+ERROR : [27/Aug/2023 12:35:46 package : micro_auth_service.controller.otpController --> position : OtpController.post --> exception : 1 validation error for OtpDTO
+verification_type
+  Field required [type=missing, input_value={'phone': '8392035529', '...000000', 'verify': True}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.2/v/missing]
+INFO : [27/Aug/2023 12:36:20 package : micro_auth_service.controller.otpController --> position : OtpController.post]
+INFO : [27/Aug/2023 12:43:01 package : micro_auth_service.controller.otpController --> position : OtpController.post]
+INFO : [27/Aug/2023 12:44:00 package : micro_auth_service.controller.otpController --> position : OtpController.post]
