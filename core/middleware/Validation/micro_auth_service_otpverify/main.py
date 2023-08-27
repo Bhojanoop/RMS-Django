@@ -22,10 +22,10 @@ class OTPValidationMiddleware:
                     raise Exception("phone does not exists")
                 
             elif dto.verification_type=='REGISTER': 
-                if not (Vendor.objects.filter(phone=dto.phone).exists() and Vendor.objects.filter(email=dto.email).exists()):
-                    return True
-                else:
-                    raise Exception("phone or email exists")
+                if Vendor.objects.filter(phone=dto.phone).exists():
+                    raise Exception("phone already exists")
+                elif Vendor.objects.filter(email=dto.email).exists():
+                    raise Exception("email already exists")
         except Exception as e:
             raise Exception(str(e))
     
