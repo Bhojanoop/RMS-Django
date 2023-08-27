@@ -7,7 +7,7 @@ email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 class VendorDTO(BaseModel):
     full_name:constr(min_length=1,max_length=90,strip_whitespace=True)
     email:constr(min_length=1,max_length=90,strip_whitespace=True)
-    phone:constr(min_length=1,max_length=12,strip_whitespace=True)
+    phone:constr(min_length=10,max_length=10,strip_whitespace=True)
     confirm_password:constr(strip_whitespace=True,max_length=10)=None
     password:constr(min_length=1,strip_whitespace=True,max_length=10)
     referral_code:constr(strip_whitespace=True)=''
