@@ -2,6 +2,7 @@ import json
 from django.conf import settings
 from core.middleware.Validation.micro_auth_service_login.main import LoginValidationMiddleware
 from core.middleware.Validation.micro_auth_service_register.main import RegisterValidationMiddleware
+from core.middleware.Validation.micro_auth_service_otpverify.main import OTPValidationMiddleware
 
 import os
 
@@ -28,5 +29,7 @@ class Factory:
                 return LoginValidationMiddleware()
             elif loc['endpoint']=='register' and loc['app']=='micro_auth_service':
                 return RegisterValidationMiddleware()
+            elif loc['endpoint']=='otp-verification' and loc['app']=='micro_auth_service':
+                return OTPValidationMiddleware()
   
         return None

@@ -3,7 +3,7 @@
         { "app": "micro_auth_service", "endpoint": "register", "protected": 0, "validation": 1 },
         { "app": "micro_auth_service", "endpoint": "login", "protected": 0, "validation": 1 },
         { "app": "micro_auth_service", "endpoint": "get-new-token", "protected": 1 },
-        { "app": "micro_auth_service", "endpoint": "otp-verification", "protected": 0 },
+        { "app": "micro_auth_service", "endpoint": "otp-verification", "protected": 0, "validation": 1 },
         { "app": "micro_brand_service", "endpoint": "brand", "protected": 1 }
     ]
 }

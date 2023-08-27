@@ -9,13 +9,13 @@ from micro_auth_service.model.customer_model import Customer
 @dataclass
 class SentOtpDto:
     otp_main:OtpDTO=field(default_factory=object)
-    sentable_otp:int=field(default_factory=int)
+    sentable_otp:str=field(default_factory=str)
     expiry:float=field(default_factory=float)
 
     def __post_init__(self):
         try:
             #self.sentable_otp=random.randint(000000,999999)
-            self.sentable_otp=000000
+            self.sentable_otp='000000'
             self.expiry=datetime.timestamp(datetime.now()+timedelta(minutes=3))
         except Exception as e:
             raise Exception(str(e))
