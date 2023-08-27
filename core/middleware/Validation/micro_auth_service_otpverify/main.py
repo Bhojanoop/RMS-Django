@@ -1,6 +1,7 @@
 from micro_auth_service.DTO.otp.otp_dto import OtpDTO
 from micro_auth_service.model.vendor_models import Vendor
 import json
+from pydantic import ValidationError
 
 class OTPValidationMiddleware:
 
@@ -15,17 +16,18 @@ class OTPValidationMiddleware:
     
     def _is_cred_ok(self,dto:OtpDTO)->bool:
         try:
-            if dto.verification_type=='LOGIN':
+            if dto.verification_type=='NOT_NEW_USER':
                 if Vendor.objects.filter(phone=dto.phone).exists():
                     return True
                 else:
                     raise Exception("phone does not exists")
                 
-            elif dto.verification_type=='REGISTER': 
+            elif dto.verification_type=='NEW_USER': 
                 if Vendor.objects.filter(phone=dto.phone).exists():
                     raise Exception("phone already exists")
-                elif Vendor.objects.filter(email=dto.email).exists():
-                    raise Exception("email already exists")
+                if dto.email:
+                    if Vendor.objects.filter(email=dto.email).exists():
+                        raise Exception("email already exists")
         except Exception as e:
             raise Exception(str(e))
     
@@ -38,7 +40,7 @@ class OTPValidationMiddleware:
                 dto=OtpDTO(**_data)
                 self._is_verificationType_ok(dto=dto)
                 self._is_cred_ok(dto=dto)
-        except Exception as e:
-            raise Exception(str(e))
+        except ValidationError as e:
+            raise Exception(e.errors()[0]['msg'])
 
     

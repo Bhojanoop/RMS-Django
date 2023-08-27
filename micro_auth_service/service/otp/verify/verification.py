@@ -6,7 +6,7 @@ class Verify:
 
     def verify(self,dto:OtpDTO)->dict:
         try:
-            if OTP.objects.get(verifiable_cred=dto.phone):
+            if OTP.objects.filter(verifiable_cred=dto.phone).exists():
                 obj=OTP.objects.get(verifiable_cred=dto.phone)
                 if(int(obj.otp)==int(dto.otp) and float(obj.expiry))>datetime.timestamp(datetime.now()):
                     obj.delete()
@@ -17,6 +17,6 @@ class Verify:
                     obj.delete()
                     return {"message":"Invalid OTP!"}
             else:
-                raise Exception("credential for otp does not match!")
+                raise Exception("credential for otp verify does not match!")
         except Exception as e:
             raise Exception(str(e))

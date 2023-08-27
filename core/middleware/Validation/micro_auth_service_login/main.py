@@ -3,6 +3,7 @@ from micro_auth_service.model.admin_model import Admin
 from micro_auth_service.model.vendor_models import Vendor
 import json
 from django.contrib.auth.hashers import check_password
+from pydantic import ValidationError
 
 class LoginValidationMiddleware:
 
@@ -39,5 +40,5 @@ class LoginValidationMiddleware:
             if not self.password_matched(password=dto.password,DB=db,username=dto.username):
                 raise Exception("password doesn't match!")
 
-        except Exception as e:
-            raise Exception(str(e))
+        except ValidationError as e:
+            raise Exception(e.errors()[0]['msg'])

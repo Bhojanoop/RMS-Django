@@ -1,7 +1,7 @@
 from micro_auth_service.DTO.register.main.admin import AdminDTO
 from micro_auth_service.DTO.register.main.vendor import VendorDTO
 from micro_auth_service.DTO.register.main.customer import CustomerDTO
-
+from pydantic import ValidationError
 import json
 
 class RegisterValidationMiddleware:
@@ -22,5 +22,6 @@ class RegisterValidationMiddleware:
             usertype=arr[len(arr)-1].split('=')[1]
 
             self._registers[usertype.upper()](**_data)
-        except Exception as e:
-            raise Exception(str(e))
+
+        except ValidationError as e:
+            raise Exception(e.errors()[0]['msg'])

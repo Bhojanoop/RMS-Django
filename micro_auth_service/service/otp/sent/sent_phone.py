@@ -5,6 +5,6 @@ class OTPPhoneSent:
     def sent(self,dto:SentOtpDto)->bool:
         try:
             print('phone')
-            return {"message":f"otp sent to {dto.otp_main.phone} .Validity for next 3 mins."}
+            return {"message":f"OTP sent successfully!"}
         except Exception as e:
             raise Exception(str(e))
