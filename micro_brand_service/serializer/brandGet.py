@@ -13,7 +13,7 @@ class BrandRoleSerializer(serializers.ModelSerializer):
         model=BrandRoles
         exclude = ('brand', )
 
-class BrandGetAllSerializer(serializers.ModelSerializer):
+class BrandGetSerializer(serializers.ModelSerializer):
     brand_verification=BrandVerificationSerializer(many=True,default=[])
     brandroles_brand=BrandRoleSerializer(many=True,default=[])
     class Meta:

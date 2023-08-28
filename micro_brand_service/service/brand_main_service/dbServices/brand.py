@@ -1,5 +1,5 @@
 from micro_brand_service.serializer.brandCreate import BrandCreateSerializer
-from micro_brand_service.DTO.brand_creation_dto.dbdto.brand_db import BrandCreateDbDTO
+from micro_brand_service.DTO.brand_main_dto.dbdto.brand_db import BrandCreateDbDTO
 
 class CreateBrand:
 

@@ -6,12 +6,18 @@ class ValidateMiddleWare:
     def __init__(self, get_response):
         self.get_response = get_response
     
+    def _notadmin(self,request):
+        if str(request.path).split("/") not in ["admin"]:
+            return True
+        return False
+    
     def __call__(self, request):
         try:
-            ob=Factory().middleware(request=request)
-            if ob:
-                ob.validates(request=request)
-           
+            if self._notadmin(request):
+                ob=Factory().middleware(request=request)
+                if ob:
+                    ob.validates(request=request)
+
             response = self.get_response(request)
             return response
         except Exception as e:

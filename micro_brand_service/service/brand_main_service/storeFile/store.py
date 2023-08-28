@@ -1,6 +1,6 @@
 from core.utils.filesStore.store import Store
 
-from micro_brand_service.DTO.brand_creation_dto.main import BrandCreateDTO
+from micro_brand_service.DTO.brand_main_dto.main import BrandCreateDTO
 
 class StoreFile:
 

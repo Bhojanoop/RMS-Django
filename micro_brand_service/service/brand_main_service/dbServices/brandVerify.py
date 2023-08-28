@@ -1,5 +1,5 @@
 from micro_brand_service.models.brandVerification import BrandVerification
-from micro_brand_service.DTO.brand_creation_dto.dbdto.brandVerify_db import BrandCreateVerifyDbDTO
+from micro_brand_service.DTO.brand_main_dto.dbdto.brandVerify_db import BrandCreateVerifyDbDTO
 
 class CreateBrandVerify:
 

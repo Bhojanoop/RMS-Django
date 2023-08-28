@@ -25,6 +25,11 @@ class Authorization:
             return True
         else:
            return False
+        
+    def _notadmin(self,request):
+        if str(request.path).split("/") not in ["admin"]:
+            return True
+        return False
     
     def isTokenValid(self,request):
         try:
@@ -38,12 +43,14 @@ class Authorization:
             return False
 
     def __call__(self, request):
-        loc=self.get_exact_loc(request=request)
-        if loc and loc['protected']==1:
-            if not self.hasToken(request=request):
-                return JsonResponse({'message': 'no bearer token found!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
-            elif not self.isTokenValid(request=request):
-                return JsonResponse({'message': 'token is invalid!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
+        if self._notadmin(request):
+            loc=self.get_exact_loc(request=request)
+            print(loc)
+            if loc and loc['protected']==1:
+                if not self.hasToken(request=request):
+                    return JsonResponse({'message': 'no bearer token found!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
+                elif not self.isTokenValid(request=request):
+                    return JsonResponse({'message': 'token is invalid!',"timestamp":datetime.timestamp(datetime.now())}, status=403)
 
         response = self.get_response(request)
         return response

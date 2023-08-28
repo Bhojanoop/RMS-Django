@@ -1,5 +1,5 @@
 from dataclasses import dataclass,field
-from micro_brand_service.DTO.brand_creation_dto.main import BrandCreateDTO
+from micro_brand_service.DTO.brand_main_dto.main import BrandCreateDTO
 from datetime import datetime
 import uuid
 

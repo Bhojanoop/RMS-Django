@@ -1,6 +1,6 @@
 from micro_brand_service.service.brand_main_service.dbServices.maindb import DbService
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
-from micro_brand_service.serializer.brandGetAll import BrandGetAllSerializer
+from micro_brand_service.serializer.brandGet import BrandGetSerializer
 from micro_brand_service.models.brand import Brand
 
 class MainService:
@@ -18,7 +18,7 @@ class MainService:
                 query=paginator.page(1)
             except EmptyPage:
                 query=paginator.page(paginator.num_pages)
-            data=BrandGetAllSerializer(query,many=True).data
+            data=BrandGetSerializer(query,many=True).data
             return {"brand":data}
         except Exception as e:
             raise Exception(str(e))

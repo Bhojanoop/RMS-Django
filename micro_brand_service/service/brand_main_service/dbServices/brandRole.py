@@ -1,4 +1,4 @@
-from micro_brand_service.DTO.brand_creation_dto.dbdto.brandRole_db import BrandCreateDefaultRoleDbDTO
+from micro_brand_service.DTO.brand_main_dto.dbdto.brandRole_db import BrandCreateDefaultRoleDbDTO
 from micro_brand_service.models.brandRoles import BrandRoles
 
 class CreateBrandRoleDefault:

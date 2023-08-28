@@ -5,6 +5,7 @@
         { "app": "micro_auth_service", "endpoint": "get-new-token", "protected": 1 },
         { "app": "micro_auth_service", "endpoint": "otp-verification", "protected": 0, "validation": 1 },
         { "app": "micro_auth_service", "endpoint": "mail-verify", "protected": 0, "validation": 1 },
-        { "app": "micro_brand_service", "endpoint": "brand", "protected": 1 }
+        { "app": "micro_brand_service", "endpoint": "main", "protected": 1 },
+        { "app": "micro_brand_service", "endpoint": "specefic", "protected": 1 }
     ]
 }
