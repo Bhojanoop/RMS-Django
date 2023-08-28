@@ -13,9 +13,9 @@ logger=logging.getLogger('mylogger')
 class GetNewToken(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        self._service:NewTokenService=NewTokenService()
+        self._service:NewTokenService=NewTokenService
 
     @log(logger=logger)
     def get(self,request:object,usertype:str,userid:str):
-        message=self._service.get(usertype=usertype,userid=userid)
+        message=self._service().get(usertype=usertype,userid=userid)
         return Response(message,status=status.HTTP_201_CREATED)

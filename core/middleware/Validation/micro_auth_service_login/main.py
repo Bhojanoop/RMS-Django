@@ -34,8 +34,8 @@ class LoginValidationMiddleware:
             dto=LoginDTO(**_data)
             db=self._logins[usertype.upper()]
             
-            if not self.has_user(username=dto.username,DB=db):
-                raise Exception("user doesn't exists!")
+            #if not self.has_user(username=dto.username,DB=db):
+            #    raise Exception("user doesn't exists!")
             
             if not self.password_matched(password=dto.password,DB=db,username=dto.username):
                 raise Exception("password doesn't match!")

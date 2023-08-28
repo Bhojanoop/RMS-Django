@@ -4,6 +4,7 @@ from micro_auth_service.controller.loginController import Login
 from micro_auth_service.controller.getnewTokenController import GetNewToken
 from micro_auth_service.controller.otpController import OtpController
 from micro_auth_service.controller.mailVerifyController import MailVerificationController,MailVerify
+from micro_auth_service.controller.resetpasswordController import ResetPasswordController
 
 
 urlpatterns = [
@@ -12,5 +13,6 @@ urlpatterns = [
     path('get-new-token/user-type=<str:usertype>&userid=<str:userid>',GetNewToken.as_view()),
     path('otp-verification',OtpController.as_view()),
     path('mail-verify',MailVerificationController.as_view()),
-    path('bhojanoop/mail-verify/email=<str:email>&user=<str:user>',MailVerify.as_view())
+    path('bhojanoop/mail-verify/email=<str:email>&user=<str:user>',MailVerify.as_view()),
+    path('reset-password/user-type=<str:usertype>',ResetPasswordController.as_view())
 ]

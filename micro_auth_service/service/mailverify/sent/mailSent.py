@@ -6,7 +6,6 @@ from datetime import datetime
 class MailService:
 
     def get_username(self,email):
-        print('hi2')
         try:
             return Vendor.objects.filter(email=email).values('full_name')[0]['full_name']
         except Exception as e:

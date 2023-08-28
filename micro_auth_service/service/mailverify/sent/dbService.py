@@ -6,7 +6,6 @@ class DbMailVerifyService:
 
     def save_record(self,dto:MailVerifyDTO)->bool:
         try:
-            print('hi')
             if not MailVerify.objects.filter(email=dto.email).exists():
                 MailVerify.objects.create(
                     email=dto.email,
