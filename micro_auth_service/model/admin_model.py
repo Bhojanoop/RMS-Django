@@ -16,6 +16,11 @@ class Admin(models.Model):
     permission_level=models.CharField(max_length=1,null=True,blank=True,choices=PERMISSION_LEVEL,default='1')
     refresh_token=models.TextField(default="",null=True,blank=True)
 
+    class Meta:
+        indexes=[
+            models.Index(fields=['phone','email'])
+        ]
+
     def is_valid_password(self,password):
         return check_password(password,self.password)
 

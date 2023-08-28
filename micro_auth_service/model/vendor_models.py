@@ -13,6 +13,11 @@ class Vendor(models.Model):
     registered_at=models.CharField(max_length=20,null=True,blank=True)
     refresh_token=models.TextField(default="",null=True,blank=True)
 
+    class Meta:
+        indexes=[
+            models.Index(fields=['phone','email'])
+        ]
+
     def is_valid_password(self,password):
         return check_password(password,self.password)
 

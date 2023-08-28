@@ -3,7 +3,7 @@ from micro_brand_service.DTO.brand_creation_dto.main import BrandCreateDTO
 from datetime import datetime
 from micro_auth_service.model.vendor_models import Vendor
 from micro_brand_service.models.brand import Brand
-from micro_brand_service.models.roles import RolesBrand
+from micro_brand_service.models.roles import RolesForBrand
 import uuid
 
 @dataclass
@@ -22,7 +22,7 @@ class BrandCreateDefaultRoleDbDTO:
            self.id=str(uuid.uuid3(uuid.NAMESPACE_DNS,name=self.main_dto.userId+self.main_dto.brand_name)).strip()
            self.user=Vendor.objects.get(id=self.main_dto.userId)
            self.brand=Brand.objects.get(brand_id=str(uuid.uuid3(uuid.NAMESPACE_DNS,name=self.main_dto.brand_name)).strip())
-           self.role=RolesBrand.objects.get(id='1B')
+           self.role=RolesForBrand.objects.get(id='1B')
            self.created_at=datetime.now().timestamp()
         except Exception as e:
             raise Exception(str(e))
