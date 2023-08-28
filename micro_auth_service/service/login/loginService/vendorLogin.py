@@ -27,11 +27,12 @@ class VendorLogin:
     def get_tokens(self,request:str)->dict:
         try:
             vendor=self._getVendor(request=request)
+
             tokens=JwtBuilder(payload={
                 "sub":vendor.values('id')[0]['id'],
                 "name":vendor.values('full_name')[0]['full_name'],
                 "type":"vendor"
-            }).get_token()
+            },request=request).get_token()
             vendor.update(refresh_token=tokens['refresh_token'])
             return {"message":"vendor successfully logged in!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:

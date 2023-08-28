@@ -12,14 +12,14 @@ class GetNewTokenAdmin:
         except Exception as e:
             raise Exception(str(e))
 
-    def get_tokens(self,userid:str)->dict:
+    def get_tokens(self,userid:str,request:object)->dict:
         try:
             admin=self.get_admin(userid=userid)
             tokens=JwtBuilder(payload={
                 "sub":admin.id,
                 "name":admin.full_name,
                 "type":"admin"
-            }).get_token()
+            },request=request).get_token()
             admin.refresh_token=tokens['refresh_token']
             admin.save()
             return {"message":"new tokens are created for admin!","token":tokens,"timestamp":datetime.now().timestamp()}

@@ -12,14 +12,15 @@ class GetNewTokenVendor:
         except Exception as e:
             raise Exception(str(e))
 
-    def get_tokens(self,userid:str)->dict:
+    def get_tokens(self,userid:str,request:object)->dict:
         try:
+            
             vendor=self.get_vendor(userid=userid)
             tokens=JwtBuilder(payload={
                 "sub":vendor.id,
                 "name":vendor.full_name,
                 "type":"vendor"
-            }).get_token()
+            },request=request).get_token()
             vendor.refresh_token=tokens['refresh_token']
             vendor.save()
             return {"message":"new tokens are created for vendor!","token":tokens,"timestamp":datetime.now().timestamp()}

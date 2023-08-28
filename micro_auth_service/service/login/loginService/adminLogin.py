@@ -17,13 +17,13 @@ class AdminLogin:
     def get_tokens(self,request:str)->dict:
         try:
             admin=self._getAdmin(request=request)
-            print(admin)
+
             tokens=JwtBuilder(payload={
                 "sub":admin.values('id')[0]['id'],
                 "name":admin.values('full_name')[0]['full_name'],
                 "type":"admin",
                 "admin_role_id":admin.values('permission_level')[0]['permission_level']
-            }).get_token()
+            },request=request).get_token()
             admin.update(refresh_token=tokens['refresh_token'])
             return {"message":"admin successfully logged in!","token":tokens,"timestamp":datetime.now().timestamp()}
         except Exception as e:

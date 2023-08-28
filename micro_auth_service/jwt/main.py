@@ -4,11 +4,18 @@ from decouple import config
 
 class JwtBuilder(JwtABC):
 
-    def __init__(self,payload:dict={},token:str=None):
+    def __init__(self,payload:dict={},token:str=None,request:object=None):
         self._payload=payload
         self._token=token
+        if request:
+            if request.user_agent.is_mobile:
+                access_token_exp=2880
+                refresh_token_exp=20160
+            else:
+                access_token_exp=40
+                refresh_token_exp=45
         if payload:
-            self._attr=JwtCustomAttr(payload=self._payload,access_token_exp=2880,refresh_token_exp=20160)
+            self._attr=JwtCustomAttr(payload=self._payload,access_token_exp=access_token_exp,refresh_token_exp=refresh_token_exp)
     
     def get_token(self)->dict:
         try:

@@ -9,8 +9,8 @@ class NewTokenService:
             "VENDOR":GetNewTokenVendor
         }
     
-    def get(self,usertype:str,userid:str)->dict:
+    def get(self,usertype:str,userid:str,request:object)->dict:
         try:
-            return self._usertypes[usertype.upper()]().get_tokens(userid)
+            return self._usertypes[usertype.upper()]().get_tokens(userid=userid,request=request)
         except Exception as e:
             raise Exception(str(e))

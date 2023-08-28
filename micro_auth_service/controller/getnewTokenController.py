@@ -17,5 +17,5 @@ class GetNewToken(APIView):
 
     @log(logger=logger)
     def get(self,request:object,usertype:str,userid:str):
-        message=self._service().get(usertype=usertype,userid=userid)
+        message=self._service().get(usertype=usertype,userid=userid,request=request)
         return Response(message,status=status.HTTP_201_CREATED)
