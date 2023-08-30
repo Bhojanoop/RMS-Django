@@ -14,9 +14,9 @@ logger=logging.getLogger('mylogger')
 class ResetPasswordController(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        self._service=ResetPasswordService
+        self._service=ResetPasswordService()
 
     @log(logger=logger)
     def post(self,request:object,usertype:str):
-        message=self._service().reset(request=request,usertype=usertype)
+        message=self._service.reset(request=request,usertype=usertype)
         return Response(message,status=status.HTTP_200_OK)

@@ -13,9 +13,9 @@ logger=logging.getLogger('mylogger')
 class OtpController(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        self._service=MainOtpService
+        self._service=MainOtpService()
 
     @log(logger=logger)
     def post(self,request:object):
-        message=self._service().process(request)
+        message=self._service.process(request)
         return Response(message,status=status.HTTP_202_ACCEPTED)

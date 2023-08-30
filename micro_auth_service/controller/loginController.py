@@ -14,9 +14,9 @@ from micro_auth_service.service.login.main import MainLoginService
 class Login(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        self._loginservice=MainLoginService
+        self._loginservice=MainLoginService()
 
     @log(logger=logger)
     def post(self,request:object,usertype:str):
-        message=self._loginservice().login(request=request,usertype=usertype)
+        message=self._loginservice.login(request=request,usertype=usertype)
         return Response(message,status=status.HTTP_200_OK)

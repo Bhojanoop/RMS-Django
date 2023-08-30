@@ -13,9 +13,9 @@ logger=logging.getLogger('mylogger')
 class Register(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        self._service:MainRegisterService=MainRegisterService
+        self._service:MainRegisterService=MainRegisterService()
 
     @log(logger=logger)
     def post(self,request:object,usertype:str):
-        message=self._service().register(request=request,usertype=usertype)
+        message=self._service.register(request=request,usertype=usertype)
         return Response(message,status=status.HTTP_201_CREATED)

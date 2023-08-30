@@ -8,6 +8,22 @@ class BrandCreateDTO(BaseModel):
     govt_doc_filename:constr(min_length=1,strip_whitespace=True)
     govt_doc_b64encode:constr(min_length=1,strip_whitespace=True)
 
+    @validator('brand_logo_filename',allow_reuse=True,always=True)
+    def reaname_brandLogo(cls,value,values):
+        try:
+            if value:
+                return values['userId']+value
+        except Exception as e:
+            raise Exception(str(e))
+    
+    @validator('govt_doc_filename',allow_reuse=True,always=True)
+    def reaname_branverifyGovtFile(cls,value,values):
+        try:
+            if value:
+                return values['userId']+value
+        except Exception as e:
+            raise Exception(str(e))
+
     @validator('brand_logo_b64encode',allow_reuse=True,always=True)
     def arrange_musicFileObj(cls,value):
         try:

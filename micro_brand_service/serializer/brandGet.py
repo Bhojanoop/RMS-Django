@@ -18,6 +18,6 @@ class BrandGetSerializer(serializers.ModelSerializer):
     brandroles_brand=BrandRoleSerializer(many=True,default=[])
     class Meta:
         model=Brand
-        fields=('brand_id','brand_name','brand_name','brand_logo_filename','is_verified','created_at','brand_verification','brandroles_brand')
+        fields=('brand_id','brand_name','brand_logo_filename','is_verified','verified_by','created_at','brand_verification','brandroles_brand')
 
 

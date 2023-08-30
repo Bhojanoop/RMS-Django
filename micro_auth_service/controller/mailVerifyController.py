@@ -25,11 +25,11 @@ class MailVerificationController(APIView):
 
 class MailVerify(View):
     def __init__(self, **kwargs: Any) -> None:
-        self._service=MainMailVerifyService
+        self._service=MainMailVerifyService()
 
     def get(self,request,email,user):
         try:
-            service=self._service().verify(email)
+            service=self._service.verify(email)
             if service:
                 return render(request=request,template_name='email_verify.html',context={
                     "user":user

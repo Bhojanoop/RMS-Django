@@ -13,16 +13,16 @@ logger=logging.getLogger('mylogger')
 class BrandMainController(APIView):
 
     def __init__(self, **kwargs: Any) -> None:
-        self._service:MainService=MainService
+        self._service:MainService=MainService()
 
     @log(logger=logger)
     def post(self,request,page=None):
-        res=self._service().create(request=request)
+        res=self._service.create(request=request)
         return Response(res,status=status.HTTP_201_CREATED)
     
     @log(logger=logger)
     def get(self,request,page=None):
         page=request.path.split("/")[len(request.path.split("/"))-1]
-        res=self._service().getAll(int(page))
+        res=self._service.getAll(int(page))
         return Response(res,status=status.HTTP_200_OK)
     
