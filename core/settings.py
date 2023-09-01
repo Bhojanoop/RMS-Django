@@ -58,7 +58,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
     'core.middleware.Authorization.permission.Authorization',
-    'core.middleware.Validation.validate.ValidateMiddleWare',
 ]
 
 ROOT_URLCONF = 'core.urls'
