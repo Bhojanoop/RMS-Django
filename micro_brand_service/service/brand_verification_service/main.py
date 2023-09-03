@@ -2,10 +2,7 @@ from micro_brand_service.serializer.brandGetVerifications import BrandVerifySeri
 from micro_brand_service.models.brandVerification import BrandVerification
 from datetime import datetime
 from micro_brand_service.DTO.brand_verify_dto.verify_dto import BrandVerifyDTO
-from micro_brand_service.DTO.brand_generic_dto.createRole_dto import BrandCreateRoleDTO
 from micro_auth_service.model.admin_model import Admin
-from micro_brand_service.models.roles import RolesForBrand
-from micro_brand_service.service.brand_generic_service.create_role_service import CreateRoleService
 
 class BrandVerifyMainService:
 
@@ -26,11 +23,6 @@ class BrandVerifyMainService:
             admin=Admin.objects.get(id=dto.verified_by)
             brand.verified_by=admin
             brand.save()
-
-            #make the user as a default super admin
-            CreateRoleService().create(
-                BrandCreateRoleDTO(user=brand_verify_obj.user,brand=brand,role=RolesForBrand.objects.get(id='1B'))
-            )
 
             #send mail
             return {"message":"brand is verified","timestamp":datetime.now().timestamp()}
