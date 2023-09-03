@@ -13,3 +13,5 @@ class BrandPatchDTO(BaseModel):
                 raise Exception("file base64 must be provided")
             return values['userId']+value
         return value
+    
+    

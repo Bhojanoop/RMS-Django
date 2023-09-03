@@ -25,6 +25,13 @@ class BrandVerificationController(APIView):
     def get(self,request):
         res=self._service.getAll(request=request)
         return Response(res,status=status.HTTP_200_OK)
+
+    @log(logger=logger)
+    def delete(self,request):
+        res=self._service.reject(request=request)
+        return Response(res,status=status.HTTP_200_OK)
+
+
     
     
     

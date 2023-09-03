@@ -1,5 +1,4 @@
 from micro_brand_service.service.brand_main_service.dbServices.brand import CreateBrand
-from micro_brand_service.service.brand_main_service.dbServices.brandRole import CreateBrandRoleDefault
 from micro_brand_service.service.brand_main_service.dbServices.brandVerify import CreateBrandVerify
 
 from micro_brand_service.service.brand_main_service.storeFile.store import StoreFile
@@ -16,12 +15,6 @@ class DbService:
         except Exception as e:
             raise Exception(str(e))
     
-    def _create_brand_deafult_role(self,request:object)->dict:
-        try:
-            return CreateBrandRoleDefault().save(request=request)
-        except Exception as e:
-            raise Exception(str(e)) 
-    
     def _create_brand_verify(self,request:object)->dict:
         try:
             self._store.storeGovtFile(request)
@@ -32,11 +25,9 @@ class DbService:
     def process(self,request:object):
         try:
             data1=self._create_brand(request)
-            data2=self._create_brand_deafult_role(request)
             data3=self._create_brand_verify(request)
             return {
                 "brand":data1,
-                "brandRole":data2,
                 "verification":data3
             }
         except Exception as e:
