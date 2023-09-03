@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django_user_agents',
     'rest_framework',
     'micro_brand_service',
-    'micro_auth_service'
+    'micro_auth_service',
+    'micro_branch_service',
 ]
 
 MIDDLEWARE = [

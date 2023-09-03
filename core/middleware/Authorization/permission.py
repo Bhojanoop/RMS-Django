@@ -34,7 +34,6 @@ class Authorization:
     def isTokenValid(self,request):
         try:
             res=JwtBuilder(token=(request.META.get('HTTP_AUTHORIZATION').split(' ', 1)[1])).decode()
-            print(res)
             if res.get('sub'):
                 return True
             return False
@@ -45,7 +44,6 @@ class Authorization:
     def __call__(self, request):
         if self._notadmin(request):
             loc=self.get_exact_loc(request=request)
-            print(loc)
             if loc and loc['protected']==1:
                 if not self.hasToken(request=request):
                     return JsonResponse({'message': 'no bearer token found!',"timestamp":datetime.timestamp(datetime.now())}, status=403)

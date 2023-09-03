@@ -56,7 +56,7 @@ class OtpDTO(BaseModel):
 
     
     @validator('user_type',allow_reuse=True,always=True)
-    def otp_and_verify_validate(cls,value,values):
+    def userType_validate(cls,value,values):
 
         if values['verify']==False and value:
             if value.upper() in ['ADMIN','VENDOR','CUSTOMER']:
