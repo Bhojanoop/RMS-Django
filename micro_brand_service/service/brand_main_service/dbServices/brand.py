@@ -5,6 +5,7 @@ from micro_brand_service.models.roles import RolesForBrand
 from micro_brand_service.DTO.brand_generic_dto.createRole_dto import BrandCreateRoleDTO
 from micro_auth_service.model.vendor_models import Vendor
 from micro_brand_service.models.brand import Brand
+from django.db import transaction
 
 class CreateBrand:
 
@@ -18,31 +19,32 @@ class CreateBrand:
 
     def save(self,request:object)->dict:
         try:
-            dto=BrandCreateDbDTO(request=request).__dict__
-
-            main_dto=dto['main_dto'].__dict__
-            vendor_id=main_dto['userId']
-            del dto['request']
-            del dto['main_dto']
-            del main_dto['userId']
-            del main_dto['brand_logo_b64encode']
-            del main_dto['govt_doc_filename']
-            del main_dto['govt_doc_b64encode']
-
-            data=dto|main_dto
-
-            serializer=BrandCreateSerializer(data=data)
-
-            if serializer.is_valid():
-                serializer.save()
-
-                self._createDefaultRole(
-                userid=vendor_id,
-                brand_id=dto['brand_id'],
-                role_id='1B'
-                )
-
-                return serializer.data
+            with transaction.atomic():
+                dto=BrandCreateDbDTO(request=request).__dict__
+    
+                main_dto=dto['main_dto'].__dict__
+                vendor_id=main_dto['userId']
+                del dto['request']
+                del dto['main_dto']
+                del main_dto['userId']
+                del main_dto['brand_logo_b64encode']
+                del main_dto['govt_doc_filename']
+                del main_dto['govt_doc_b64encode']
+    
+                data=dto|main_dto
+    
+                serializer=BrandCreateSerializer(data=data)
+    
+                if serializer.is_valid():
+                    serializer.save()
+    
+                    self._createDefaultRole(
+                    userid=vendor_id,
+                    brand_id=dto['brand_id'],
+                    role_id='1B'
+                    )
+    
+                    return serializer.data
             
             raise Exception(str(serializer.errors))
         except Exception as e:

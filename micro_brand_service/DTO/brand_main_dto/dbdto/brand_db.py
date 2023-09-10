@@ -7,7 +7,7 @@ import uuid
 class BrandCreateDbDTO:
     request:object=field(default_factory=object)
     brand_id:str=field(default_factory=str)
-    is_verified:bool=False
+    is_verified:bool=True
     created_at:float=field(default_factory=float)
     main_dto:BrandCreateDTO=field(default_factory=object)
 

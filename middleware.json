@@ -7,6 +7,7 @@
         { "app": "micro_auth_service", "endpoint": "mail-verify", "protected": 0 },
         { "app": "micro_brand_service", "endpoint": "main", "protected": 1 },
         { "app": "micro_brand_service", "endpoint": "specefic", "protected": 1 },
-        { "app": "micro_brand_service", "endpoint": "brand-verifications", "protected": 1 }
+        { "app": "micro_brand_service", "endpoint": "brand-verifications", "protected": 1 },
+        { "app": "micro_branch_service", "endpoint": "main", "protected": 1 }
     ]
 }

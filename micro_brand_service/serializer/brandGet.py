@@ -14,10 +14,10 @@ class BrandRoleSerializer(serializers.ModelSerializer):
         exclude = ('brand', )
 
 class BrandGetSerializer(serializers.ModelSerializer):
-    brand_verification=BrandVerificationSerializer(many=True,default=[])
+    #brand_verification=BrandVerificationSerializer(many=True,default=[])
     brandroles_brand=BrandRoleSerializer(many=True,default=[])
     class Meta:
         model=Brand
-        fields=('brand_id','brand_name','brand_logo_filename','is_verified','verified_by','created_at','brand_verification','brandroles_brand')
+        fields=('brand_id','brand_name','brand_logo_filename','is_verified','verified_by','created_at','brandroles_brand')
 
 
